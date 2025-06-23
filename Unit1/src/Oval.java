@@ -15,6 +15,14 @@ public class Oval extends Shape{
     /** Width of oval */
     private int width;
 
+    /**
+     * Constructor for oval class
+     * @param point1 first point
+     * @param point2 second point
+     * @param color color value
+     * @param height height of oval
+     * @param width width of oval
+     */
     public Oval(Point point1, Point point2, double color, int height, int width){
         super(point1, point2, color);
         this.height = height;

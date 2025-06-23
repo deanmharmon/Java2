@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Test;
 import java.awt.Point;
 import static org.junit.Assert.*;
 
+/**
+ * Test for line class
+ * @author Dean Mason
+ * @version 1.1
+ */
 public class LineTest {
     @Test
     public void testLine(){
@@ -24,6 +29,9 @@ public class LineTest {
         assertEquals(newPoint1, l.getPoint1());
         assertEquals(newPoint2, l.getPoint2());
         assertEquals(newColor, l.getColor(), 0.0001);
+        /**
+         * This runs the test for initializing class as well as setting new points and color
+         */
 
     }
 

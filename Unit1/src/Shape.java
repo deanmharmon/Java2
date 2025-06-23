@@ -1,5 +1,7 @@
 //Dean Mason
-//Unit1
+//Unit 1
+//I don't know if the variable names are the same as before, I just used ones that seemed sensible
+//I will upload the video of me writing this so you can see me looking back at java documentation for things I was unsure of
 
 import java.awt.*;
 
