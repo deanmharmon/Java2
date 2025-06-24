@@ -1,0 +1,1 @@
+public enum Shapes {OVAL, LINE, BOX}

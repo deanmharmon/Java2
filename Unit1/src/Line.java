@@ -21,16 +21,8 @@ public class Line extends Shape{
      */
     @Override
     public void draw (Graphics g){
-        int startMouseX=0, startMouseY=0, endMouseX=0, endMouseY=0;
-        MouseUse mouse = new MouseUse();
-
-        startMouseX = mouse.beginMouseX;
-        startMouseY = mouse.beginMouseY;
-        endMouseX = mouse.endMouseX;
-        endMouseY = mouse.endMouseY;
-
-        g.setColor(Color.GREEN);
-        g.drawLine(startMouseX, startMouseY, endMouseX, endMouseY);
+        g.setColor(getColor());
+        g.drawLine(getPoint1().x, getPoint1().y, getPoint2().x, getPoint2().y);
     }
 
 }

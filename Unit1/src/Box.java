@@ -19,9 +19,9 @@ public class Box extends Shape{
      */
     @Override
     public void draw(Graphics g) {
-        int mouseX = 0, mouseY = 0, width = 0, height = 0;
-       //TODO- create vars and implement swtichable colors
-        g.setColor(Color.GREEN);
-        g.drawRect(mouseX, mouseY, width, height);
+        int width = getPoint1().x + getPoint2().x;
+        int height = getPoint1().y + getPoint2().y;
+        g.setColor(g.getColor());
+        g.drawRect(getPoint1().x, getPoint1().y, width, height);
     }
 }

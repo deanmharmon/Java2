@@ -8,12 +8,6 @@ import javax.swing.*;
  */
 public class Main {
     public static void main(String[] args) {
-        Frame f = new Frame();
-        MouseUse mouse = new MouseUse();
-        JComponent drawings = new DrawingPane();
-        f.add(drawings);
-        drawings.addMouseListener(mouse);
-        f.createComponents();
-
+        new Frame();
     }
 }

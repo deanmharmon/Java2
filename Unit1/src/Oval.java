@@ -35,9 +35,7 @@ public class Oval extends Shape{
      */
     @Override
     public void draw(Graphics g) {
-        int mouseX=0, mouseY=0, width=0, height=0;
-        //TODO implement vars and add switchable colors
-        g.setColor(Color.GREEN);
-        g.drawOval(mouseX, mouseY, width, height);
+        g.setColor(g.getColor());
+        g.drawOval(getPoint1().x, getPoint1().y, getPoint2().x, getPoint2().y);
     }
 }

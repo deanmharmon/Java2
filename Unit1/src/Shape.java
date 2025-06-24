@@ -86,7 +86,7 @@ public abstract class Shape {
         this.color = newColor;
     }
 
-    public enum shape {OVAL, LINE, BOX}
+    public enum Shapes {OVAL, LINE, BOX}
 
 
 
