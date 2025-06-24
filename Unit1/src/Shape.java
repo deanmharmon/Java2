@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * Shape is an abstract class to be used by individual shapes
  * @author Dean Mason
- * @version 1.2 -Updated to have Color for colors
+ * @version 2.0  -Updated to have Color for colors
  */
 public abstract class Shape {
     /** First point*/
@@ -85,9 +85,5 @@ public abstract class Shape {
     public void setColor(Color newColor){
         this.color = newColor;
     }
-
-    public enum Shapes {OVAL, LINE, BOX}
-
-
 
 }

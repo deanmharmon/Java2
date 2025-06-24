@@ -1,3 +1,6 @@
+//Dean Mason
+//Unit 2
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -5,23 +8,29 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
+/**
+ * This class is used to handle all input for the program, can be updated later to account for more uses
+ * @author Dean Mason
+ * @version 2.0
+ */
 public class InputHandler extends MouseAdapter implements KeyListener {
+    /**
+     * Variables with well-written names will not be doc'd
+     */
     private int beginMouseX;
     private int endMouseX;
     private int beginMouseY;
     private int endMouseY;
-    private boolean dragging = false;
+    /** Starts us with using a line to draw */
     private Shapes shape = Shapes.LINE;
     private boolean trails = false;
     private Color currentColor = Color.BLACK;
-    private char whichKey;
     private final DrawingPane pane;
 
 
     /**
      * Constructor, sets drawing pane up
-     * @param newPane
+     * @param newPane ^
      */
     public InputHandler(DrawingPane newPane){
         this.pane = newPane;
@@ -35,76 +44,39 @@ public class InputHandler extends MouseAdapter implements KeyListener {
     public void mousePressed(MouseEvent e){
         beginMouseX = e.getX();
         beginMouseY = e.getY();
-        dragging = true;
         pane.beginShape(beginMouseX, beginMouseY, shape, currentColor);
     }
 
     /**
-     * Mouse released override
+     * Mouse released override, not necessary anymore since I decided to place
+     * almost all logic inside mouse dragged for cleaner code
      * @param e the event to be processed
      */
     @Override
     public void mouseReleased(MouseEvent e){
         endMouseX = e.getX();
         endMouseY = e.getY();
-        dragging = false;
     }
 
     /**
-     * Mouse dragged override
+     * Mouse dragged override, holds logic for using trails or not and when update pane
      * @param e the event to be processed
      */
     @Override
     public void mouseDragged(MouseEvent e){
         endMouseX = e.getX();
         endMouseY = e.getY();
-        dragging = true;
 
+        /// It gives a warning here about condition trail always being true....
+        /// But the function of it in app works.
         if (!trails){
             pane.updateShape(endMouseX, endMouseY);
         }
         else if (trails) {
-            pane.beginShape(endMouseX, endMouseY, shape, currentColor);
-            beginMouseX = endMouseX;
-            beginMouseY = endMouseY;
+            pane.beginShape(beginMouseX, beginMouseY, shape, currentColor);
+            pane.updateShape(endMouseX, endMouseY);
         }
 
-    }
-
-    /**
-     * Returns the x value when mouse press occurs
-     * @return
-     */
-    public int getBeginMouseX(){
-        return beginMouseX;
-    }
-
-    /**
-     * @return x value when mouse pressed
-     */
-    public int getBeginMouseY(){
-        return beginMouseY;
-    }
-
-    /**
-     * @return x value when mouse is released
-     */
-    public int getEndMouseX(){
-        return endMouseX;
-    }
-
-    /**
-     * @return y value when mouse is released
-     */
-    public int getEndMouseY(){
-        return endMouseY;
-    }
-
-    /**
-     * @return if mouse is still being dragged
-     */
-    public boolean isDragging(){
-        return dragging;
     }
 
     @Override
@@ -119,7 +91,7 @@ public class InputHandler extends MouseAdapter implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        whichKey = Character.toUpperCase(e.getKeyChar());
+        char whichKey = Character.toUpperCase(e.getKeyChar());
 
         switch(whichKey){
             case 'E':
@@ -139,8 +111,12 @@ public class InputHandler extends MouseAdapter implements KeyListener {
                 break;
             case 'C':
                 Color choice = JColorChooser.showDialog(null, "Select a color!", currentColor);
-                currentColor = choice;
+                //Breaks program if you select cancel in color picker
+                if (choice != null) {
+                    currentColor = choice;
+                }
                 break;
+                ///No default case is needed because we don't need to handle other input and don't want it to crash
         }
     }
 
@@ -149,21 +125,4 @@ public class InputHandler extends MouseAdapter implements KeyListener {
         //Not necessary
     }
 
-    /**
-     * @return Which key was pressed
-     */
-    public char getWhichKey() {
-        return whichKey;
-    }
-
-    /**
-     * @return Which shape is being used currently
-     */
-    public Shapes getShape() {
-        return shape;
-    }
-
-    public boolean isTrails() {
-        return trails;
-    }
 }

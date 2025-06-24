@@ -2,12 +2,11 @@
 //Unit 2
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 /**
  * Line is an extension of shape class, inherits draw method
  * @author Dean Mason
- * @version 1.1
+ * @version 2.0
  */
 public class Line extends Shape{
 
@@ -16,7 +15,8 @@ public class Line extends Shape{
         super(point1, point2, color);
     }
     /**
-     * Draw method for lines
+     * Draw method for lines, much simpler than doing it for boxes/ovals so the method for getpoint is passed
+     * directly into it rather than assigned to another var
      * @param g Graphics object to be used
      */
     @Override

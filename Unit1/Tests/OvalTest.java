@@ -19,7 +19,7 @@ public class OvalTest {
         Point point1 = new Point(2,2);
         Point point2 = new Point(3,3);
         Color color = new Color(100, 50, 27);
-        Oval o = new Oval(point1, point2, color, 10, 10);
+        Oval o = new Oval(point1, point2, color);
         assertEquals(point1, o.getPoint1());
         assertEquals(point2, o.getPoint2());
         assertEquals(color, o.getColor());
@@ -34,7 +34,7 @@ public class OvalTest {
         assertEquals(setPoint2, o.getPoint2());
         assertEquals(newColor, o.getColor());
 
-        /**
+        /*
          * This tests for all cases, it includes setting new points and colors and works without error
          */
 

@@ -6,36 +6,38 @@ import java.awt.*;
 /**
  * Oval extends shape, implements the draw method
  * @author Dean Mason
- * @version 1.1
+ * @version 2.0
  */
 public class Oval extends Shape{
-
-    /** Height of oval */
-    private int height;
-    /** Width of oval */
-    private int width;
 
     /**
      * Constructor for oval class
      * @param point1 first point
      * @param point2 second point
      * @param color color value
-     * @param height height of oval
-     * @param width width of oval
      */
-    public Oval(Point point1, Point point2, Color color, int height, int width){
+    public Oval(Point point1, Point point2, Color color){
         super(point1, point2, color);
-        this.height = height;
-        this.width = width;
 
     }
     /**
      * Draw method for ovals
+     * A lot of math because otherwise it doesn't want to draw when you flip it around
      * @param g Graphics object to be used
      */
     @Override
     public void draw(Graphics g) {
-        g.setColor(g.getColor());
-        g.drawOval(getPoint1().x, getPoint1().y, getPoint2().x, getPoint2().y);
+        g.setColor(getColor());
+        int beginX = getPoint1().x;
+        int beginY = getPoint1().y;
+        int endX = getPoint2().x;
+        int endY = getPoint2().y;
+        int originX = Math.min(beginX, endX);
+        int originY = Math.min(beginY, endY);
+        /// Using the absolute value prevents the program from trying to figure out how
+        /// to draw an oval with negative width or height
+        int width = Math.abs(beginX - endX);
+        int height = Math.abs(beginY - endY);
+        g.drawOval(originX, originY, width, height);
     }
 }
