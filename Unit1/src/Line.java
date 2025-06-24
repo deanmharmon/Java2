@@ -1,7 +1,8 @@
 //Dean Mason
-//Unit 1
+//Unit 2
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * Line is an extension of shape class, inherits draw method
@@ -11,7 +12,7 @@ import java.awt.*;
 public class Line extends Shape{
 
 
-    public Line(Point point1, Point point2, double color){
+    public Line(Point point1, Point point2, Color color){
         super(point1, point2, color);
     }
     /**
@@ -20,7 +21,16 @@ public class Line extends Shape{
      */
     @Override
     public void draw (Graphics g){
+        int startMouseX=0, startMouseY=0, endMouseX=0, endMouseY=0;
+        MouseUse mouse = new MouseUse();
 
+        startMouseX = mouse.beginMouseX;
+        startMouseY = mouse.beginMouseY;
+        endMouseX = mouse.endMouseX;
+        endMouseY = mouse.endMouseY;
+
+        g.setColor(Color.GREEN);
+        g.drawLine(startMouseX, startMouseY, endMouseX, endMouseY);
     }
 
 }

@@ -1,5 +1,5 @@
 //Dean Mason
-//Unit 1
+//Unit 2
 //I don't know if the variable names are the same as before, I just used ones that seemed sensible
 //I will upload the video of me writing this so you can see me looking back at java documentation for things I was unsure of
 
@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * Shape is an abstract class to be used by individual shapes
  * @author Dean Mason
- * @version 1.1
+ * @version 1.2 -Updated to have Color for colors
  */
 public abstract class Shape {
     /** First point*/
@@ -16,7 +16,7 @@ public abstract class Shape {
     /** Second point*/
     private Point point2;
     /** Color value*/
-    private double color;
+    private Color color;
 
     /**
      * Constructor for Shape, will initialize instance vars
@@ -25,7 +25,7 @@ public abstract class Shape {
      * @param point2 given second point
      * @param color given color
      */
-    public Shape(Point point1, Point point2, double color){
+    public Shape(Point point1, Point point2, Color color){
         this.point1 = point1;
         this.point2 = point2;
         this.color = color;
@@ -74,7 +74,7 @@ public abstract class Shape {
      * Returns color value
      * @return color
      */
-    public double getColor(){
+    public Color getColor(){
         return color;
     }
 
@@ -82,8 +82,12 @@ public abstract class Shape {
      * Sets the color value
      * @param newColor new color
      */
-    public void setColor(double newColor){
-        color = newColor;
+    public void setColor(Color newColor){
+        this.color = newColor;
     }
+
+    public enum shape {OVAL, LINE, BOX}
+
+
 
 }

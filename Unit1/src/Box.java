@@ -1,5 +1,5 @@
 //Dean Mason
-//Unit 1
+//Unit 2
 
 import java.awt.*;
 
@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class Box extends Shape{
 
-    public Box(Point point1, Point point2, double color){
+    public Box(Point point1, Point point2, Color color){
         super(point1, point2, color);
     }
     /**
@@ -19,6 +19,9 @@ public class Box extends Shape{
      */
     @Override
     public void draw(Graphics g) {
-
+        int mouseX = 0, mouseY = 0, width = 0, height = 0;
+       //TODO- create vars and implement swtichable colors
+        g.setColor(Color.GREEN);
+        g.drawRect(mouseX, mouseY, width, height);
     }
 }

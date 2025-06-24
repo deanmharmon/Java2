@@ -1,5 +1,5 @@
 //Dean Mason
-//Unit 1
+//Unit 2
 
 import java.awt.*;
 
@@ -23,7 +23,7 @@ public class Oval extends Shape{
      * @param height height of oval
      * @param width width of oval
      */
-    public Oval(Point point1, Point point2, double color, int height, int width){
+    public Oval(Point point1, Point point2, Color color, int height, int width){
         super(point1, point2, color);
         this.height = height;
         this.width = width;
@@ -35,6 +35,9 @@ public class Oval extends Shape{
      */
     @Override
     public void draw(Graphics g) {
-
+        int mouseX=0, mouseY=0, width=0, height=0;
+        //TODO implement vars and add switchable colors
+        g.setColor(Color.GREEN);
+        g.drawOval(mouseX, mouseY, width, height);
     }
 }
