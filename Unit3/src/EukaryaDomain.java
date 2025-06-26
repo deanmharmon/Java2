@@ -7,14 +7,14 @@
  * @version 1.0
  */
 public abstract class EukaryaDomain {
-    String className;
-    String order;
-    String family;
-    String genus;
-    String species;
-    String name;
-    boolean isExtinct;
-    String extinction;
+    private String className;
+    private String order;
+    private String family;
+    private String genus;
+    private String species;
+    private String name;
+    private boolean isExtinct;
+    private String extinction;
 
     /**
      * Constructor
