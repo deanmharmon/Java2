@@ -1,6 +1,11 @@
 //Dean Mason
 //Unit 3
 
+/**
+ * Abstract class for Eukarya Domain
+ * @author Dean Mason
+ * @version 1.0
+ */
 public abstract class EukaryaDomain {
     String className;
     String order;
@@ -11,8 +16,19 @@ public abstract class EukaryaDomain {
     boolean isExtinct;
     String extinction;
 
+    /**
+     * Constructor
+     *
+     * @param className name of class
+     * @param order     name of order
+     * @param family    name of family
+     * @param genus     name of genus
+     * @param species   name of species
+     * @param name      name
+     * @param isExtinct is extinct boolean
+     */
     public EukaryaDomain(String className, String order, String family,
-                         String genus, String species, String name, boolean isExtinct){
+                         String genus, String species, String name, boolean isExtinct) {
         this.className = className;
         this.order = order;
         this.family = family;
@@ -23,17 +39,88 @@ public abstract class EukaryaDomain {
 
     }
 
+    /**
+     * @return String of valuable information
+     */
     @Override
-    public String toString(){
+    public String toString() {
         //TODO finish
-        if (isExtinct){
+        if (isExtinct) {
             extinction = "Is extinct.";
-        }else {
+        } else {
             extinction = "Is not extinct.";
         }
-        return("Class -> " + className + "\nOrder -> "
-        + order + "\nFamily -> " + family + "\nGenus -> "
-        + genus + "\nSpecies -> " + species + "\nName -> "
-        + name + "\n" + extinction);
+        return ("Class -> " + className + "\nOrder -> "
+                + order + "\nFamily -> " + family + "\nGenus -> "
+                + genus + "\nSpecies -> " + species + "\nName -> "
+                + name + "\n" + extinction);
     }
+
+    /// All setters and getters
+    /// Naming conventions are obvious enough that javadocing each one feels excessive
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public void setExtinct(boolean extinct) {
+        isExtinct = extinct;
+    }
+
+    public void setExtinction(String extinction) {
+        this.extinction = extinction;
+    }
+
+    public void setFamily(String family) {
+        this.family = family;
+    }
+
+    public void setGenus(String genus) {
+        this.genus = genus;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public String getExtinction() {
+        return extinction;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public String getFamily() {
+        return family;
+    }
+
+    public String getGenus() {
+        return genus;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public boolean isExtinct() {
+        return isExtinct;
+    }
+
 }
