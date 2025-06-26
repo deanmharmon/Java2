@@ -6,7 +6,7 @@
  * @author Dean Mason
  * @version 1.0
  */
-public class Aardvarks  extends AnimaliaKingdom implements ConsumesAnts{
+public class Aardvarks extends AnimaliaKingdom implements ConsumesAnts{
 
     private String habitat;
 

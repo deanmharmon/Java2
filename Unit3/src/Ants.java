@@ -10,7 +10,7 @@ public class Ants extends AnimaliaKingdom{
     private String casteLevel;
 
     /**
-     * Consctuctor
+     * Constructor
      * @param className name of class
      * @param order name of order
      * @param family name of family
