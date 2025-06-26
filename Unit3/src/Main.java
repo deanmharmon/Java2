@@ -16,7 +16,7 @@ public class Main {
                 "Woodland");
         Ants ant = new Ants("Insecta", "Hymenoptera", "Formicidae",
                 "Solenopsis", "Invicta", "Fire Ant", false, "Anthropoda",
-                "Queen");
+              "Queen");
         System.out.println(ant.toString() + "\n");
         System.out.println(aard.toString() + "\n");
         System.out.println(vft.toString());

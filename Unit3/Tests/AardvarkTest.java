@@ -30,5 +30,13 @@ public class AardvarkTest {
         Assert.assertFalse(aard.isExtinct());
         Assert.assertEquals("Woodland", aard.getHabitat());
         Assert.assertEquals(phylum, aard.getPhylum());
+        aard.setHabitat("Fire");
+        aard.setExtinct(true);
+        aard.setClassName("New");
+        aard.setGenus("New");
+        Assert.assertEquals("Fire", aard.getHabitat());
+        Assert.assertEquals("New", aard.getClassName());
+        Assert.assertTrue(aard.isExtinct());
+        Assert.assertEquals("New", aard.getGenus());
     }
 }
