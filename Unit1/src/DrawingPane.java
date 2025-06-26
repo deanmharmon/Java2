@@ -27,7 +27,7 @@ public class DrawingPane extends JComponent {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        //Enhanced for loop could be used, but these make more sense to me
+        //Enhanced for loop could be used, but these make more sense/look cleaner to me
         for (int count = 0; count < shapesList.size(); count++) {
             shapesList.get(count).draw(g);
         }

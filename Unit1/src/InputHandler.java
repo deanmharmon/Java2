@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 
 /**
  * This class is used to handle all input for the program, can be updated later to account for more uses
+ * extends MouseAdapter and implements KeyListener
  * @author Dean Mason
  * @version 2.0
  */
