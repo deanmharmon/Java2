@@ -41,4 +41,14 @@ public class CaveDrawing extends JPanel {
 
         }
     }
+
+    public int getCaveCellDepth(int row, int column){
+        return cellCoord[row][column].getDepth();
+    }
+
+    public Point getCellPosition(int row, int column){
+        return new Point(cellCoord[row][column].getRow(),
+                cellCoord[row][column].getColumn());
+    }
+
 }

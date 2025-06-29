@@ -1,7 +1,7 @@
 public class CaveCell {
-    private int row;
-    private int column;
-    private int depth;
+    private final int row;
+    private final int column;
+    private final int depth;
 
     public CaveCell(int row, int column, int depth){
         this.row = row;
