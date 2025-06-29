@@ -60,6 +60,7 @@ public class GUI extends JFrame {
 
         setVisible(true);
 
+
     }
 
     public void newCave(){
@@ -78,8 +79,8 @@ public class GUI extends JFrame {
     public int getDepthRating() {
         if (textInp.getText().isEmpty()) {
             //TODO finish error checking
-            //return Integer.parseInt(textInp.getText());
-        } //else return 1;
+            return Integer.parseInt(textInp.getText());
+        } else return 1;
     }
 
     public CaveDrawing getCaveGrid(){

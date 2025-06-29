@@ -37,6 +37,7 @@ public class CaveDrawing extends JPanel {
                 box.setBackground(depthBased(randInt));
                 box.add(depthNum);
                 add(box);
+                System.out.println("row" + row + " " + "column " + column);
             }
 
         }
