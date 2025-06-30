@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class CaveDrawing extends JPanel {
-    private CaveCell[][] cellCoord = new CaveCell[10][10];
+    private final CaveCell[][] cellCoord = new CaveCell[10][10];
     
     /**
      * Returns a color based on the depth, not the most

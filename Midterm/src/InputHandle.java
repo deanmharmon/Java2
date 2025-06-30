@@ -3,10 +3,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class InputHandle implements ActionListener {
-    private JButton escape;
-    private JButton newCave;
-    private GUI gui;
-    private Cave attempt;
+    private final JButton escape;
+    private final JButton newCave;
+    private final GUI gui;
     private int depthRating;
 
     public InputHandle(JButton escape, JButton newCave, GUI gui){
@@ -19,7 +18,7 @@ public class InputHandle implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == escape){
             int depthRating = gui.getDepthRating();
-            attempt = new Cave(depthRating, gui.getCaveGrid(), gui);
+            Cave attempt = new Cave(depthRating, gui.getCaveGrid(), gui);
             //TODO add recursive func
         }
         else if(e.getSource() == newCave){

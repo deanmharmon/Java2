@@ -1,9 +1,5 @@
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.plaf.basic.BasicButtonListener;
-import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class GUI extends JFrame {
 
@@ -11,8 +7,7 @@ public class GUI extends JFrame {
     final int FRAME_HEIGHT = 800;
     private CaveDrawing caveGrid;
     String frameName = "Cave Diver - Find an Escape Route";
-    private JTextField textInp;
-    private Cave cave;
+    private final JTextField textInp;
 
     public GUI(){
 
