@@ -14,11 +14,4 @@ public class CaveCell {
         return depth;
     }
 
-    public int getColumn() {
-        return column;
-    }
-
-    public int getRow() {
-        return row;
-    }
 }

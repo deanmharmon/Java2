@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -50,10 +49,6 @@ public class CaveDrawing extends JPanel {
         return cellCoord[row][column].getDepth();
     }
 
-    public CaveCell[][] getCellCoord(){
-        return cellCoord;
-    }
-
     public void drawWinningSolution(ArrayList<Point> path){
         for (Point point : path) {
             int row = point.x;
@@ -70,6 +65,7 @@ public class CaveDrawing extends JPanel {
                 winningGrid[row][col].setBackground(depthBased(depth));
             }
         }
+
         repaint();
     }
 }
