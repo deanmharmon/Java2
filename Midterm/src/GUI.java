@@ -87,4 +87,8 @@ public class GUI extends JFrame {
     public CaveDrawing getCaveGrid(){
         return caveGrid;
     }
+
+    public void failedPopup(){
+        JOptionPane.showMessageDialog(this, "You were not able to escape!");
+    }
 }

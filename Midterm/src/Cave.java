@@ -22,7 +22,10 @@ public class Cave {
         caveInfo.resetForAttempt();
         ArrayList<Point> pathAttempt = new ArrayList<>();
         boolean[][] checked = new boolean[10][10];
-        recursiveSolution(0,0,0, checked, pathAttempt);
+        if (!recursiveSolution(0,0,0, checked, pathAttempt)){
+            gui.failedPopup();
+        }
+
     }
 
     public boolean recursiveSolution(int row, int column, int movesMade, boolean[][] checked, ArrayList<Point> pathAttempt){
