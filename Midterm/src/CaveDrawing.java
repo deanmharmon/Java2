@@ -1,10 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class CaveDrawing extends JPanel {
     private final CaveCell[][] cellCoord = new CaveCell[10][10];
-    
+    private final JPanel[][] winningGrid = new JPanel[10][10];
     /**
      * Returns a color based on the depth, not the most
      * robust solution, but it works well and can be edited easily
@@ -29,6 +31,7 @@ public class CaveDrawing extends JPanel {
                 /// This line saves the info to our CaveCell instance
                 cellCoord[row][column] = new CaveCell(row, column, randInt);
                 JPanel box = new JPanel();
+                winningGrid[row][column] = box;
                 JLabel depthNum = new JLabel("" + randInt);
                 depthNum.setForeground(Color.WHITE);
                 depthNum.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -47,9 +50,26 @@ public class CaveDrawing extends JPanel {
         return cellCoord[row][column].getDepth();
     }
 
-    public Point getCellPosition(int row, int column){
-        return new Point(cellCoord[row][column].getRow(),
-                cellCoord[row][column].getColumn());
+    public CaveCell[][] getCellCoord(){
+        return cellCoord;
     }
 
+    public void drawWinningSolution(ArrayList<Point> path){
+        for (Point point : path) {
+            int row = point.x;
+            int column = point.y;
+            winningGrid[row][column].setBackground(Color.RED);
+        }
+        repaint();
+    }
+
+    public void resetForAttempt(){
+        for(int row = 0; row < 10; row++){
+            for (int col = 0; col < 10; col++) {
+                int depth = cellCoord[row][col].getDepth();
+                winningGrid[row][col].setBackground(depthBased(depth));
+            }
+        }
+        repaint();
+    }
 }

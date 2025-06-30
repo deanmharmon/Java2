@@ -6,8 +6,6 @@ public class InputHandle implements ActionListener {
     private final JButton escape;
     private final JButton newCave;
     private final GUI gui;
-    private int depthRating;
-
     public InputHandle(JButton escape, JButton newCave, GUI gui){
         this.escape = escape;
         this.newCave = newCave;
@@ -17,9 +15,15 @@ public class InputHandle implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == escape){
+
             int depthRating = gui.getDepthRating();
+            /// This stops it from running if invalid input is entered
+            if (depthRating == -1){
+                return;
+            }
             Cave attempt = new Cave(depthRating, gui.getCaveGrid(), gui);
-            //TODO add recursive func
+            attempt.tryToSolve();
+
         }
         else if(e.getSource() == newCave){
             gui.newCave();

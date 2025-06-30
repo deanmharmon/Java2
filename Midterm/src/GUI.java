@@ -67,15 +67,21 @@ public class GUI extends JFrame {
         repaint();
     }
 
-    public void winningSolution(){
-        //TODO finish
-    }
-
     public int getDepthRating() {
-        if (textInp.getText().isEmpty()) {
-            //TODO finish error checking
-            return Integer.parseInt(textInp.getText());
-        } else return 1;
+        try{
+            int depth = Integer.parseInt(textInp.getText());
+
+            if (depth <= 0) {
+                JOptionPane.showMessageDialog(this,
+                        "You have not entered a positive number, please enter a positive integer.");
+                return -1;
+            }
+            return depth;
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(this,
+                    "Please enter a valid integer.");
+            return -1;
+        }
     }
 
     public CaveDrawing getCaveGrid(){
