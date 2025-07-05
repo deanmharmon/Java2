@@ -6,13 +6,14 @@ import java.util.Random;
 public class CaveDrawing extends JPanel {
     private final CaveCell[][] cellCoord = new CaveCell[10][10];
     private final JPanel[][] winningGrid = new JPanel[10][10];
+
     /**
      * Returns a color based on the depth, not the most
      * robust solution, but it works well and can be edited easily
      * @param depth the random num for depth
      * @return the color for the given box
      */
-    private Color depthBased(int depth){
+    private Color depthBasedColor(int depth){
         int red = depth * 3;
         int green = depth * 3;
         int blue = 230 - (depth * 23);
@@ -36,7 +37,7 @@ public class CaveDrawing extends JPanel {
                 depthNum.setFont(new Font("Arial", Font.PLAIN, 20));
                 box.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-                box.setBackground(depthBased(randInt));
+                box.setBackground(depthBasedColor(randInt));
                 box.add(depthNum);
                 add(box);
                 System.out.println("row" + row + " " + "column " + column);
@@ -62,7 +63,7 @@ public class CaveDrawing extends JPanel {
         for(int row = 0; row < 10; row++){
             for (int col = 0; col < 10; col++) {
                 int depth = cellCoord[row][col].getDepth();
-                winningGrid[row][col].setBackground(depthBased(depth));
+                winningGrid[row][col].setBackground(depthBasedColor(depth));
             }
         }
 

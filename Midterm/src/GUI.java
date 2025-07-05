@@ -38,21 +38,19 @@ public class GUI extends JFrame {
 
         caveGrid = new CaveDrawing();
 
-
         /*
         Mostly formatting things in this section to get it to
         look similar to the one shown in the demo video
          */
         setLayout(new BorderLayout());
+
         topText.setHorizontalAlignment(SwingConstants.CENTER);
         topText.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         caveGrid.setBorder(BorderFactory.createEmptyBorder(20,80,20,80));
         userInput.setBorder(BorderFactory.createEmptyBorder(10,10,30,10));
-        //First add puts the instructions
+
         add(topText, BorderLayout.NORTH);
-        //Second add puts the caveGrid on;
         add(caveGrid, BorderLayout.CENTER);
-        //Third adds the user input section at the bottom
         add(userInput, BorderLayout.SOUTH);
 
         setVisible(true);
@@ -72,16 +70,16 @@ public class GUI extends JFrame {
     public int getDepthRating() {
         try{
             int depth = Integer.parseInt(textInp.getText());
-
             if (depth <= 0) {
                 JOptionPane.showMessageDialog(this,
-                        "You have not entered a positive number, please enter a positive integer.");
+                        "You have not entered a positive number, please enter a positive whole number.");
                 return -1;
             }
             return depth;
+
         }catch (NumberFormatException e){
             JOptionPane.showMessageDialog(this,
-                    "Please enter a valid integer.");
+                    "Please enter a valid whole number.");
             return -1;
         }
     }
@@ -90,7 +88,7 @@ public class GUI extends JFrame {
         return caveGrid;
     }
 
-    public void failedPopup(){
+    public void failed(){
         JOptionPane.showMessageDialog(this, "You were not able to escape!");
     }
 }

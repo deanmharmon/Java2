@@ -6,6 +6,7 @@ public class InputHandle implements ActionListener {
     private final JButton escape;
     private final JButton newCave;
     private final GUI gui;
+
     public InputHandle(JButton escape, JButton newCave, GUI gui){
         this.escape = escape;
         this.newCave = newCave;

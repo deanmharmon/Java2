@@ -19,19 +19,21 @@ public class Cave {
         caveInfo.reset();
         ArrayList<Point> pathAttempt = new ArrayList<>();
         boolean[][] checked = new boolean[10][10];
-        if (!escape(0,0,0, checked, pathAttempt)){
-            gui.failedPopup();
+        if (!escape(new Point(0,0),20, checked, pathAttempt)){
+            gui.failed();
         }
 
     }
 
-    public boolean escape(int row, int column, int breath, boolean[][] checked, ArrayList<Point> pathAttempt){
+    public boolean escape(Point location, int breath, boolean[][] checked, ArrayList<Point> pathAttempt){
+        int x = location.x;
+        int y = location.y;
 
-        if ((row < 0) || (row >= 10) || (column < 0) || (column >= 10)){
+        if (((x >= 10) || (y >= 10)) || ((x < 0) || (y < 0))){
             return false;
         }
 
-        if (checked[row][column]){
+        if (checked[x][y]){
             return false;
         }
 
@@ -40,42 +42,37 @@ public class Cave {
         }
 
 
-        int depth = caveInfo.getCaveCellDepth(row, column);
+        int depth = caveInfo.getCaveCellDepth(x, y);
         if (depthRating < depth){
             return false;
         }
 
 
-        if ((row == 9) && (column == 9)) {
-            pathAttempt.add(new Point(row, column));
+        if ((x == 9) && (y == 9)) {
+            pathAttempt.add(new Point(x, y));
             caveInfo.drawWin(pathAttempt);
-            System.out.println("Row" + row + "Column " + column);
+            System.out.println("Row" + x + "Column " + y);
             return true;
         }
 
         //marks path
-        checked[row][column] = true;
-        pathAttempt.add(new Point(row, column));
+        checked[x][y] = true;
+        pathAttempt.add(new Point(x, y));
 
-        int[][] directions = {
-                {0, 1}, {1, 0}, {0, -1}, {-1,0}
-        };
-        int right = 1;
-        int down = 0;
-        int up = 0;
-        int left = 1;
-
-
-        for (int[] value : directions){
-            int newRow = row + value[0];
-            int newColumn = column + value[1];
-
-            if (escape(newRow, newColumn, breath - 1, checked, pathAttempt)){
-                return true;
-            }
+        if (escape(new Point(x,y+1), breath - 1, checked, pathAttempt)){
+            return true;
+        }
+        if (escape(new Point(x + 1,y), breath - 1, checked, pathAttempt)){
+            return true;
+        }
+        if (escape(new Point(x,y - 1), breath - 1, checked, pathAttempt)){
+            return true;
+        }
+        if (escape(new Point(x - 1,y), breath - 1, checked, pathAttempt)){
+            return true;
         }
 
-        checked[row][column] = false;
+        checked[x][y] = false;
         pathAttempt.removeLast();
 
         return false;
