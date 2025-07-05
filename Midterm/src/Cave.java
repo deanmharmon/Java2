@@ -51,7 +51,6 @@ public class Cave {
         int x = location.x;
         int y = location.y;
 
-
         if (((x >= MAX_SIZE) || (y >= MAX_SIZE)) || ((x < 0) || (y < 0))){
             return false;
         }

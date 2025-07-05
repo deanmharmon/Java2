@@ -9,10 +9,10 @@ import java.util.Random;
  * CaveDrawing class is a JPanel object to be placed in the GUI
  */
 public class CaveDrawing extends JPanel {
-    //10x10 grid of each cell, plus panel for each
-    private final CaveCell[][] cell = new CaveCell[10][10];
-    private final JPanel[][] winningPath = new JPanel[10][10];
     private final int MAX_SIZE = 10;
+    private final CaveCell[][] cell = new CaveCell[MAX_SIZE][MAX_SIZE];
+    private final JPanel[][] winningPath = new JPanel[MAX_SIZE][MAX_SIZE];
+
 
     /**
      * Returns a color based on the depth, not the most

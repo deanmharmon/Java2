@@ -1,9 +1,11 @@
 //Dean Mason
 //Midterm
 
+/**
+ * Class main instantiates the gui
+ */
 public class Main {
     public static void main(String[] args) {
-        //TODO finish
-        final GUI gui = new GUI();
+        GUI gui = new GUI();
     }
 }
