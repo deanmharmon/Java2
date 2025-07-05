@@ -1,11 +1,18 @@
+//Dean Mason
+//Midterm
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * CaveDrawing class is a JPanel object to be placed in the GUI
+ */
 public class CaveDrawing extends JPanel {
-    private final CaveCell[][] cellCoord = new CaveCell[10][10];
-    private final JPanel[][] winningGrid = new JPanel[10][10];
+    //10x10 grid of each cell, plus panel for each
+    private final CaveCell[][] cell = new CaveCell[10][10];
+    private final JPanel[][] winningPath = new JPanel[10][10];
+    private final int MAX_SIZE = 10;
 
     /**
      * Returns a color based on the depth, not the most
@@ -21,49 +28,65 @@ public class CaveDrawing extends JPanel {
         return new Color(red, green, blue);
     }
 
+    /**
+     * Constructor for the cave grid
+     */
     public CaveDrawing(){
-        setLayout(new GridLayout(10, 10, 0, 0));
+        setLayout(new GridLayout(MAX_SIZE, MAX_SIZE, 0, 0));
 
-        for (int row = 0; row < 10; row++){
-            for (int column = 0; column < 10; column++){
+        for (int x = 0; x < MAX_SIZE; x++){
+            for (int y = 0; y < MAX_SIZE; y++){
                 Random random = new Random();
-                int randInt = random.nextInt(10) + 1;
-                /// This line saves the info to our CaveCell instance
-                cellCoord[row][column] = new CaveCell(row, column, randInt);
+                int randInt = random.nextInt(MAX_SIZE) + 1;
+                cell[x][y] = new CaveCell(new Point(x, y), randInt);
+
                 JPanel box = new JPanel();
-                winningGrid[row][column] = box;
+                winningPath[x][y] = box;
+
                 JLabel depthNum = new JLabel("" + randInt);
                 depthNum.setForeground(Color.WHITE);
-                depthNum.setFont(new Font("Arial", Font.PLAIN, 20));
-                box.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+                depthNum.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 
+                box.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
                 box.setBackground(depthBasedColor(randInt));
                 box.add(depthNum);
                 add(box);
-                System.out.println("row" + row + " " + "column " + column);
+                //System.out.println("row" + x + " " + "column " + y);
             }
 
         }
     }
 
-    public int getCaveCellDepth(int row, int column){
-        return cellCoord[row][column].getDepth();
+    /**
+     * @param x x-coordinate
+     * @param y y- coordinate
+     * @return returns the depth shown on screen
+     */
+    public int getCaveCellDepth(int x, int y){
+        return cell[x][y].getDepth();
     }
 
+    /**
+     * Draws the winning path on the screen
+     * @param path array point for the correct path
+     */
     public void drawWin(ArrayList<Point> path){
-        for (Point point : path) {
-            int row = point.x;
-            int column = point.y;
-            winningGrid[row][column].setBackground(Color.RED);
+        for (Point box : path) {
+            int x = box.x;
+            int y = box.y;
+            winningPath[x][y].setBackground(Color.RED);
         }
         repaint();
     }
 
+    /**
+     * Resets the cave grid for when you attempt a new one, so that it doesn't overlay multiple
+     */
     public void reset(){
-        for(int row = 0; row < 10; row++){
-            for (int col = 0; col < 10; col++) {
-                int depth = cellCoord[row][col].getDepth();
-                winningGrid[row][col].setBackground(depthBasedColor(depth));
+        for(int x = 0; x < MAX_SIZE; x++){
+            for (int y = 0; y < MAX_SIZE; y++) {
+                int depth = cell[x][y].getDepth();
+                winningPath[x][y].setBackground(depthBasedColor(depth));
             }
         }
 
