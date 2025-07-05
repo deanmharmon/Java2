@@ -4,7 +4,7 @@ import java.awt.*;
 public class GUI extends JFrame {
 
     final int FRAME_WIDTH = 800;
-    final int FRAME_HEIGHT = 800;
+    final int FRAME_HEIGHT = 600;
     private CaveDrawing caveGrid;
     String frameName = "Cave Diver - Find an Escape Route";
     private final JTextField textInp;
@@ -14,6 +14,8 @@ public class GUI extends JFrame {
         setTitle(frameName);
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
 
         JLabel topText = new JLabel("The diver begins in the upper-left corner and escapes by" +
                 " reaching the lower-right corner");

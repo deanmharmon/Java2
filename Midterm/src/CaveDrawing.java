@@ -49,7 +49,7 @@ public class CaveDrawing extends JPanel {
         return cellCoord[row][column].getDepth();
     }
 
-    public void drawWinningSolution(ArrayList<Point> path){
+    public void drawWin(ArrayList<Point> path){
         for (Point point : path) {
             int row = point.x;
             int column = point.y;
@@ -58,7 +58,7 @@ public class CaveDrawing extends JPanel {
         repaint();
     }
 
-    public void resetForAttempt(){
+    public void reset(){
         for(int row = 0; row < 10; row++){
             for (int col = 0; col < 10; col++) {
                 int depth = cellCoord[row][col].getDepth();
