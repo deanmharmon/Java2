@@ -16,11 +16,11 @@ public class EnhancedBST extends BinarySearchTree{
         //TODO finish
     }
 
-    public void addData(){
+    public void addData(int newInt){
         //TODO finish
     }
 
-    public void removeData(){
+    public void removeData(int removeInt){
         //TODO finish
     }
 
@@ -40,7 +40,7 @@ public class EnhancedBST extends BinarySearchTree{
         //TODO finish
     }
 
-    public void exportToFile(){
+    public void exportToFile(String workingName){
         //TODO finish
     }
 
