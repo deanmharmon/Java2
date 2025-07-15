@@ -18,7 +18,6 @@ public class UserInterface {
      * choose what to do from menu and when to quit. Calls correct methods from EnhancedBST
      */
     public void go() {
-        //TODO finish
         System.out.println("Welcome to Enhanced BST Tester.\n");
 
         do {

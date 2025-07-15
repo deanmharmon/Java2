@@ -189,7 +189,7 @@ public class BinarySearchTree
 
     }
     /**
-     *
+     * This is the only code written by me, just returns root
      * @return root node for access outside of class
      */
     protected Node getRoot(){
