@@ -19,10 +19,10 @@ public class UserInterface {
      */
     public void go() {
         //TODO finish
-        System.out.println("Welcome to Enhanced BST Tester.\n\n");
+        System.out.println("Welcome to Enhanced BST Tester.\n");
 
         do {
-            int choice = 10;
+            choice = 10;
             while ((choice > 9) || (choice < 0)){
                 printMenu();
                 choice = intInputValidation(scanner);
@@ -38,14 +38,14 @@ public class UserInterface {
                     System.out.println("Please enter the filename that you would like to use");
                     String name = scanner.nextLine();
                     try {
-                        File file = fileValidation(name, scanner);
+                        File file = fileOpenValidation(name);
                         tree.buildFromFile(file);
                     } catch (FileNotFoundException e) {
                         System.out.println("The filename entered could not be found.");
                     }
                     break;
                 case 2:
-                    tree.printTree();
+                    tree.print();
                     break;
                 case 3:
                     System.out.println("Please enter an integer to add to the tree: ");
@@ -67,7 +67,9 @@ public class UserInterface {
                     tree.countAbsChildren();
                     break;
                 case 8:
-                    tree.findPathSum();
+                    System.out.println("Please enter the number you would like to use as your path sum: ");
+                    int userNum = intInputValidation(scanner);
+                    tree.findPathSum(userNum);
                     break;
                 case 9:
                     System.out.println("Please enter the name you would like to use for the file, do NOT include .txt");
@@ -100,11 +102,10 @@ public class UserInterface {
     /**
      * Verifies that a file exists and can be read from before performing operations on it
      * @param filename the name of the file being checked
-     * @param scanner scanner object to parse
      * @return the valid file object
      * @throws FileNotFoundException if the file cannot be found
      */
-    public File fileValidation(String filename, Scanner scanner) throws FileNotFoundException {
+    public File fileOpenValidation(String filename) throws FileNotFoundException {
         File inputFile = new File(filename);
         if (inputFile.exists() && inputFile.canRead()){
             return inputFile;
