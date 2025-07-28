@@ -6,4 +6,4 @@
  * @author Dean Mason
  * @version 2.0
  */
-public 9+enum Shapes {OVAL, LINE, BOX}
+public enum Shapes {OVAL, LINE, BOX}

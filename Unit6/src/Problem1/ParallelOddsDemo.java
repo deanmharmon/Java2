@@ -1,3 +1,5 @@
+package Problem1;
+
 import java.util.Random;
 import java.util.stream.IntStream;
 
