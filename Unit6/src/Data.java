@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.LinkedList;
 
 /**
- * Data handles saving and loading data to keep the code clean in the input handler
+ * Data handles saving and loading data to keep the code clean in the input handler. The main update for this unit is this adddition.
  * @author Dean Mason
  * @version 1.0
  */
