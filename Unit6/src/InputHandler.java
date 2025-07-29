@@ -127,17 +127,20 @@ public class InputHandler extends MouseAdapter implements KeyListener {
                 }
                 break;
             case 'R':
-                //Not sure why the IDE needs a try-catch here when it is handled in data.
+                //Try catch needed on this one to prevent running null through setShapesList
                 JFileChooser load = new JFileChooser();
                 if (load.showOpenDialog(pane) == JFileChooser.APPROVE_OPTION){
-                    File newFile = load.getSelectedFile();
-                    LinkedList<Shape> loadedShapes = null;
                     try {
-                        loadedShapes = Data.load(newFile);
+                        File newFile = load.getSelectedFile();
+                        LinkedList<Shape> loadedShapes = Data.load(newFile);
+                        if (loadedShapes == null){
+                            System.out.println("Incorrect file type loaded");
+                        } else {
+                            pane.setShapesList(loadedShapes);
+                        }
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
-                    pane.setShapesList(loadedShapes);
                 }
                 break;
                 //No default case is needed because we don't need to handle other input and don't want it to crash
