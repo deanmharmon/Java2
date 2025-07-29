@@ -64,6 +64,12 @@ public class Words
       return result;
    }
 
+   /**
+    * allLettersUnique makes sure that all the characters per word in a stream
+    * are distinct from one another
+    * @param stream stream object to be looked at
+    * @return List of strings where all letters are unique
+    */
    private static List<String> allLettersUnique(Stream<String> stream){
 
       List<String> result = stream.filter(w -> w.toLowerCase()
