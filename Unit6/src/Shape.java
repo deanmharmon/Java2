@@ -2,13 +2,14 @@
 //Unit 6 Project 6
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Shape is an abstract class to be used by individual shapes
  * @author Dean Mason
- * @version 3.0  -Updated to have Color for colors
+ * @version 3.0  -Updated to be serializable to work with the new streams
  */
-public abstract class Shape {
+public abstract class Shape implements Serializable {
     /** First point*/
     private Point point1;
     /** Second point*/

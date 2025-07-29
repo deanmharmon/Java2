@@ -8,7 +8,7 @@ import java.awt.*;
  * Frame extends JFrame, setting up what out drawing pane will be placed inside,
  * as well as putting relevant user information onto the screen
  * @author Dean Mason
- * @version 3.0
+ * @version 3.0 -added text to let user know new buttons
  */
 public class Frame extends JFrame {
 
@@ -37,8 +37,8 @@ public class Frame extends JFrame {
         drawingPanel.setFocusable(true);
         drawingPanel.addKeyListener(mouse);
 
-
-        JLabel bottomText = new JLabel("(E)rase (T)rails (L)ine (B)ox (O)val (C)olor");
+        JLabel bottomText = new JLabel("(E)rase (T)rails (L)ine (B)ox (O)val (C)olor" +
+                "(S)ave (R)estore");
         /* Aligning our text */
         bottomText.setHorizontalAlignment(SwingConstants.CENTER);
         /* Border layout is a very easy to use way to set it up */
@@ -49,8 +49,6 @@ public class Frame extends JFrame {
         /* Makes the whole thing show on the screen */
         setVisible(true);
     }
-
-
 
 
 }

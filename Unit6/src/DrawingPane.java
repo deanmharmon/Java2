@@ -8,7 +8,7 @@ import java.util.LinkedList;
 /**
  * Drawing pane, handles all graphics for the program
  * @author Dean Mason
- * @version 3.0
+ * @version 3.0 - added shapesList setter and getter to be able to use saved data/ to save data
  */
 public class DrawingPane extends JComponent {
 
@@ -67,4 +67,21 @@ public class DrawingPane extends JComponent {
         repaint();
     }
 
+    /**
+     * Added to get shapes list for data collection
+     * @return linked list of all shapes
+     */
+    public LinkedList<Shape> getShapesList(){
+        return shapesList;
+    }
+
+    /**
+     * Added to save shapes to file
+     * @param savedShapes linked list to be saved
+     */
+    public void setShapesList(LinkedList<Shape> savedShapes){
+        shapesList.clear();
+        shapesList.addAll(savedShapes);
+        repaint();
+    }
 }

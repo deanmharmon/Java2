@@ -7,12 +7,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.LinkedList;
 
 /**
  * This class is used to handle all input for the program, can be updated later to account for more uses
  * extends MouseAdapter and implements KeyListener
  * @author Dean Mason
- * @version 3.0
+ * @version 3.0 - updated to have file saving/loading options
  */
 public class InputHandler extends MouseAdapter implements KeyListener {
     /**
@@ -27,7 +29,6 @@ public class InputHandler extends MouseAdapter implements KeyListener {
     private boolean trails = false;
     private Color currentColor = Color.BLACK;
     private final DrawingPane pane;
-
 
     /**
      * Constructor, sets drawing pane up
@@ -117,7 +118,29 @@ public class InputHandler extends MouseAdapter implements KeyListener {
                     currentColor = choice;
                 }
                 break;
-                ///No default case is needed because we don't need to handle other input and don't want it to crash
+
+            case 'S':
+                JFileChooser save = new JFileChooser();
+                if (save.showSaveDialog(pane) == JFileChooser.APPROVE_OPTION){
+                    File newFile = save.getSelectedFile();
+                    Data.save(newFile, pane.getShapesList());
+                }
+                break;
+            case 'R':
+                //Not sure why the IDE needs a try-catch here when it is handled in data.
+                JFileChooser load = new JFileChooser();
+                if (load.showOpenDialog(pane) == JFileChooser.APPROVE_OPTION){
+                    File newFile = load.getSelectedFile();
+                    LinkedList<Shape> loadedShapes = null;
+                    try {
+                        loadedShapes = Data.load(newFile);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    pane.setShapesList(loadedShapes);
+                }
+                break;
+                //No default case is needed because we don't need to handle other input and don't want it to crash
         }
     }
 
