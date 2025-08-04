@@ -4,7 +4,7 @@
 import java.io.Serializable;
 
 /**
- * Used to create useful objects from JSON file
+ * Stores all info on meteorites except for geolocation
  * @author Dean Mason
  * @version 1.0
  */
@@ -21,6 +21,18 @@ public class Meteorite implements Serializable {
     private Geolocation geolocation;
 
 
+    /**
+     * Constructor, sets instance vars
+     * @param name
+     * @param id
+     * @param nametype
+     * @param recclass
+     * @param mass
+     * @param fall
+     * @param year
+     * @param reclat
+     * @param reclong
+     */
     public Meteorite(String name, String id, String nametype, String recclass, String mass, String fall, String year, String reclat,
                      String reclong){
         this.name = name;
@@ -34,19 +46,30 @@ public class Meteorite implements Serializable {
         this.reclong = reclong;
     }
 
+    /**
+     * Smaller toString basically, for when searching
+     * @return useful info
+     */
     public String display(){
         return "name= " + name + ", id= "
                 + id + ", recclass= " + recclass +
                 ", mass= " + mass + ", year= " +
-                year;
+                getYear();
     }
 
     @Override
     public String toString(){
-        return "name= " + name + ", id= "
+        String geoLoc;
+        try {
+            geoLoc = geolocation.toString();
+        }catch (Exception e){
+            geoLoc = "none";
+        }
+        return "[name= " + name + ", id= "
                 + id + ", nametype= " + nametype + ", recclass= " + recclass +
                 ", mass= " + mass + ", fall= " + fall + ", year= " +
-                year + ", reclat= " + reclat + ", reclong= " + reclong;
+                getYear() + ", reclat= " + reclat + ", reclong= " + reclong + ", geolocation=Geolocation [" +
+                geoLoc + "]]";
     }
 
     /// Below are all the auto geneated getters/settes
@@ -74,9 +97,17 @@ public class Meteorite implements Serializable {
         return fall;
     }
 
+    /**
+     * gives a year that is easy to read
+     * @return year
+     */
     public String getYear() {
-        return year;
+        if (year == null || year.length() < 2) {
+            return "0";
+        }
+        return year.substring(0,4);
     }
+
 
     public String getReclat() {
         return reclat;

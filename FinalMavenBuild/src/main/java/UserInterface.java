@@ -2,9 +2,9 @@
 //Final
 
 import com.google.gson.Gson;
-
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,25 +13,27 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Handles the UI, as well as using Gson to parse
+ * Handles the UI, as well as handling all logic. Method go is the main program loop
  *
  * @author Dean Mason
  * @version 1.0
  */
 public class UserInterface {
-    final Gson gson = new Gson();
-    Scanner scanner = new Scanner(System.in);
-    Meteorite[] fullData;
+    private final Gson gson = new Gson();
+    private final Scanner scanner = new Scanner(System.in);
+    private Meteorite[] fullData;
     final Path DEFAULT = Path.of("NASA_Meteorite.json");
 
+    /**
+     * Main loop
+     */
     public void go() {
-        try {
-            //System.out.println(Files.exists(Path.of("NASA_Meteorite.json")));
-            List<String> line = Files.readAllLines(Path.of("NASA_Meteorite.json"));
-            String data = String.join("", line);
-            fullData = gson.fromJson(data, Meteorite[].class);
-        } catch (Exception e) {
-            System.out.println("Failure.");
+
+        try (ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(("meteorites.data")))) {
+            fullData = (Meteorite[]) inStream.readObject();
+            System.out.println("Data loaded successfully from last runtime.");
+        } catch (Exception e){
+            //Meant to fail first time, so it will always just try
         }
 
         int choice;
@@ -65,15 +67,18 @@ public class UserInterface {
                     recent();
                     break;
                 case 8:
-                    listClasses();
+                    allClasses();
                     break;
                 default:
-                    System.out.println("Invalid.");
+                    System.out.println("Invalid input, please select an option.");
             }
 
         } while (choice != 0);
     }
 
+    /**
+     * Imports data from JSON file
+     */
     private void importJson() {
         try {
             System.out.print("Enter the JSON file name or press <Enter>" +
@@ -87,20 +92,22 @@ public class UserInterface {
             } else {
                 path = Path.of(jsonTry);
             }
-
+            //System.out.println(Files.exists(Path.of("NASA_Meteorite.json")));
             List<String> allJson = Files.readAllLines(path);
             String allString = String.join("", allJson);
             fullData = gson.fromJson(allString, Meteorite[].class);
             System.out.println(fullData.length + " records processed.");
 
         } catch (Exception e) {
-            System.out.println("Error.");
+            System.out.println("Failure, file not found/could not be loaded.");
         }
     }
 
+    /**
+     * Shows the toString from the meteorite/geolocation data
+     */
     private void displayData() {
-        if (fullData == null){
-            System.out.println("Data has not yet been loaded.");
+        if (dataNull()){
             return;
         }
         System.out.println("Meteorite data: \n");
@@ -110,9 +117,11 @@ public class UserInterface {
 
     }
 
+    /**
+     * Saves all info to .data file for easy recovery
+     */
     private void exportBin() {
-        if (fullData == null){
-            System.out.println("Data has not yet been loaded.");
+        if (dataNull()){
             return;
         }
         try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(("meteorites.data")))) {
@@ -123,9 +132,11 @@ public class UserInterface {
         }
     }
 
+    /**
+     * Searches for a meteorite by name
+     */
     private void findName() {
-        if (fullData == null){
-            System.out.println("Data has not yet been loaded.");
+        if (dataNull()){
             return;
         }
         System.out.print("Enter the name of the meteorite: ");
@@ -143,22 +154,117 @@ public class UserInterface {
         }
     }
 
-
-    private void listClasses() {
-    }
-
-    private void recent() {
-    }
-
-    private void largest() {
-    }
-
+    /**
+     * Searches for meteorite by ID
+     */
     private void findID() {
+        if (dataNull()){
+            return;
+        }
+        System.out.print("Enter the ID of the meteorite: ");
+        String meteorite = scanner.nextLine().trim();
+
+        Meteorite same = Arrays.stream(fullData)
+                .filter(w -> w.getId() != null && w.getId().equalsIgnoreCase(meteorite))
+                .findFirst()
+                .orElse(null);
+
+        if (same == null){
+            System.out.println("Meteor not found in data.");
+        } else {
+            System.out.println(same.display());
+        }
+    }
+
+    /**
+     * Searches for the largest X number of meteorites
+     */
+    private void largest() {
+        if (dataNull()){
+            return;
+        }
+
+        System.out.print("How many of the largest meteorites do you want to see? ");
+        int displayNum = intValidation(scanner.nextLine().trim());
+        if (displayNum == -1){
+            System.out.println("You must enter a valid number");
+            return;
+        }
+
+        Meteorite[] largest = Arrays.stream(fullData)
+                .filter(w -> doubleValidation(w.getMass()) > 0)
+                .sorted((first, second) ->
+                        Double.compare(doubleValidation(second.getMass()), doubleValidation(first.getMass())))
+                .limit(displayNum)
+                .toArray(Meteorite[]::new);
+
+        for(Meteorite l : largest){
+            System.out.println(l.display());
+        }
+
+    }
+
+    /**
+     * Searches for the most recent X number of meteorites
+     */
+    private void recent() {
+        if (dataNull()){
+            return;
+        }
+
+        System.out.print("How many of the most recent meteorites do you want to see? ");
+        int displayNum = intValidation(scanner.nextLine().trim());
+        if (displayNum == -1){
+            System.out.println("You must enter a valid number");
+            return;
+        }
+
+        Meteorite[] recent = Arrays.stream(fullData)
+                .filter(w -> intValidation(w.getYear()) > 0)
+                .sorted((first, second) ->
+                        Integer.compare(intValidation(second.getYear()),
+                                intValidation(first.getYear())))
+                .limit(displayNum)
+                .toArray(Meteorite[]::new);
+
+        for(Meteorite r : recent){
+            System.out.println(r.display());
+        }
+
+
+    }
+
+    /**
+     * Lists all the different meteorite classes and number of each in the data
+     */
+    private void allClasses() {
+        if (dataNull()){
+            return;
+        }
+        List<String> classList = Arrays.stream(fullData)
+                .map(Meteorite::getRecclass)
+                .filter(w -> w != null && !w.isBlank())
+                .distinct()
+                .sorted((first, second) -> Integer.compare(countClass(second), countClass(first)))
+                .toList();
+
+        //Not pretty, functional however
+        System.out.println("Meteorite classes:" +
+                "\nCount\tClassification\n" +
+                "=====\t===========");
+        for (String c : classList) {
+            System.out.printf("%5d\t", countClass(c));
+            System.out.printf("%s\n", c );
+        }
     }
 
 
+    /**
+     * helper to validate integers
+     * @param num input
+     * @return valid int or -1 for invalid int
+     */
     public int intValidation(String num) {
-        int valaNum;
         try {
             int valNum = Integer.parseInt(num);
             return valNum;
@@ -168,6 +274,23 @@ public class UserInterface {
         }
     }
 
+    /**
+     * validates doubles
+     * @param num input
+     * @return valid double or -1
+     */
+    public double doubleValidation(String num){
+        try {
+            double valNum = Double.parseDouble(num);
+            return valNum;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    /**
+     * helper class for menu display
+     */
     public void menu() {
         String menu = "Welcome to the NASA Meteorite tracking database." +
                 "\n\nHere's the menu of choices -" +
@@ -184,5 +307,29 @@ public class UserInterface {
         System.out.println(menu);
     }
 
+    /**
+     * helper since it gets used so frequently
+     * @return true if data is currently null
+     */
+    private boolean dataNull(){
+        if (fullData == null){
+            System.out.println("Data has not yet been loaded.");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * helper for counting the classes using a stream
+     * @param recClass name of class you're counting
+     * @return total number of a specific class
+     */
+    private int countClass(String recClass) {
+        int total = (int) Arrays.stream(fullData)
+                .filter(w -> w.getRecclass() != null && w.getRecclass().equals(recClass))
+                .count();
+        return total;
+    }
 
 }
