@@ -1,5 +1,6 @@
 //Dean Mason
 //Final
+//8-4-25
 
 import java.io.Serializable;
 
@@ -102,7 +103,7 @@ public class Meteorite implements Serializable {
      * @return year
      */
     public String getYear() {
-        if (year == null || year.length() < 2) {
+        if (year == null || year.length() < 1) {
             return "0";
         }
         return year.substring(0,4);

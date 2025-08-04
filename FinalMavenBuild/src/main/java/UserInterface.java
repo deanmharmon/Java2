@@ -1,5 +1,6 @@
 //Dean Mason
 //Final
+//8-4-25
 
 import com.google.gson.Gson;
 import java.io.FileInputStream;
@@ -243,7 +244,7 @@ public class UserInterface {
         }
         List<String> classList = Arrays.stream(fullData)
                 .map(Meteorite::getRecclass)
-                .filter(w -> w != null && !w.isBlank())
+                .filter(w -> w != null)
                 .distinct()
                 .sorted((first, second) -> Integer.compare(countClass(second), countClass(first)))
                 .toList();
